@@ -12,6 +12,7 @@
     --nav-bg: #fff;
     --aside-bg: #fff;
     --main-bg: #fff;
+    --menu-bg: #fff;
     --box-shadow:3px  3px 20px rgba(0, 0, 0, 0.25),
                 -3px  -3px 20px rgba(0, 0, 0, 0.25);
 }
@@ -38,8 +39,8 @@ li
     border-radius: 10px;
     display: grid;
     grid-template-areas: 'nav nav nav '
-                        'aside main main'
-                        'aside main main';
+                        'aside article article'
+                        'aside article article';
     grid-template-columns: 350px 1fr;
     padding: 1rem 4rem;
     nav
@@ -82,12 +83,92 @@ li
     article
     {
         height: 85%;
-        // margin:0 20px;
         padding: 2rem;
         border-radius: 20px;
         background-color: var(--main-bg);
         box-shadow:var(--box-shadow);
-        grid-area: main;
+        grid-area: article;
         text-align: justify;
+    }
+}
+@media screen and (max-width:1300px) {
+    .cont
+    {
+        nav {margin-bottom: 3rem;}
+        aside {overflow-y: scroll;}
+        article {overflow-y: scroll;}
+    }
+}
+@media screen and (max-width:1100px) {
+    .cont nav ul {width: 50%;}
+}
+@media screen and (max-width:850px) {
+    body
+    {
+        overflow: visible;
+    }
+    .cont
+    {
+        min-height:100vh ;
+        margin-top: 3rem;
+        grid-template-areas: 'nav nav nav'
+                            'article article article'
+                            'aside aside aside';
+        nav
+        {
+            transition: all .2s ease;
+            transition-delay:.2s ;
+            position: relative;
+            &.open-rad
+            {
+                border-radius: 50px 50px 0 0;
+                background-color: var(--nav-bg);
+                transition: all .2s ease;
+            }
+            .menu-but
+            {
+                width: 30px;
+                height: 30px;
+                background-image: url('./hamburger-menu-462145.webp');
+                background-position: center;
+                background-size: cover;
+                cursor: pointer;
+            }
+            ul
+            {
+                transition: all .2s ease;
+                &.open
+                {
+                    background-color: var(--nav-bg);
+                    box-shadow: 10px  15px 20px rgba(0, 0, 0, 0.25),
+                                -10px 15px 20px rgba(0, 0, 0, 0.25);
+                    transition: all .2s ease;
+                    transition-delay: .2s;
+                    height: 180px;
+                }
+                border-radius: 0 0 50px 50px;
+                transition: all .2s ease;
+                height: 0px;
+                overflow: hidden;
+                background-color: white;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                padding-left: 44px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+        }
+        article,aside {width: 100%;}
+        aside {height: 200px;}
+    }
+}
+@media screen and (max-width:500px) {
+    .cont
+    {
+        padding: 1rem 1rem;
+        nav,article,aside {width: 80vw;}
     }
 }
